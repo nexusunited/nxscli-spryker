@@ -8,6 +8,7 @@
 
   roles:
   - basics
+  - nginx
   - nodejs
   - php
   - redis

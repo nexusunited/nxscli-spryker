@@ -1,0 +1,12 @@
+---
+- name: Prepare nginx
+  file: path=/run/nginx state=directory
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+- name: Nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: yes
