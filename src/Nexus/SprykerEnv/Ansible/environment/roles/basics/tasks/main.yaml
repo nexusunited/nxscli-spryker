@@ -1,12 +1,12 @@
 ---
-- name: Upgrade system
-  apt:
-    upgrade: yes
 - name: Install general packages
   apt:
     name: python,aptitude,systemd,apt-transport-https,vim,git,curl,wget,zip,build-essential,tcl
     state: present
     update_cache: yes
+- name: Upgrade system
+  apt:
+    upgrade: yes
 - name: Install postgres
   apt:
     name: postgresql,postgresql-contrib,python-psycopg2
