@@ -1,5 +1,5 @@
 {
-  "name": "nexusnetsoftgmbh/nexuscli-skeleton",
+  "name": "nexusnetsoftgmbh/nxscli-spryker",
   "license": "MIT",
   "require-dev": {
     "codeception/codeception": "*",
