@@ -1,8 +1,18 @@
 ---
 - name: Install general packages
-  apt:
-    name: python,aptitude,systemd,apt-transport-https,vim,git,curl,wget,zip,build-essential,tcl
-    state: present
+  apt: name={{item}} state=present
+  with_items:
+    - python
+    - aptitude
+    - systemd
+    - apt-transport-https
+    - vim
+    - git
+    - curl
+    - wget
+    - zip
+    - build-essential
+    - tcl
     update_cache: yes
 - name: Upgrade system
   apt:
