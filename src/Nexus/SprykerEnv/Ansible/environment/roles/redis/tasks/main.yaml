@@ -81,7 +81,4 @@
     path: /tmp/redis-stable
     state: absent
 - name: Start redis
-  service:
-    name: redis
-    state: started
-    enabled: yes
+  shell: redis-server --daemonize yes
