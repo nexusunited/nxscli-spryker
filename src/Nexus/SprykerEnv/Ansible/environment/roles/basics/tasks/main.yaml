@@ -1,6 +1,6 @@
 ---
 - name: Install general packages
-  apt: name={{item}} state=present
+  apt: name={{item}} state=present update_cache=yes
   with_items:
     - python
     - aptitude
@@ -13,7 +13,6 @@
     - zip
     - build-essential
     - tcl
-    update_cache: yes
 - name: Upgrade system
   apt:
     upgrade: yes
