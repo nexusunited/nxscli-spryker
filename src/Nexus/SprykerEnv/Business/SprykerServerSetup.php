@@ -152,7 +152,7 @@ class SprykerServerSetup
         $command = sprintf(
             'cp %s %s',
             $this->ansiblePath . '/ansible.cfg',
-            getcwd()
+            getcwd() . '/ansible.cfg'
         );
     }
 
