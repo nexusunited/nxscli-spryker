@@ -147,7 +147,7 @@ class SprykerServerSetup
 
     private function copyAnsibleConfigToLocal(): void
     {
-        $this->writeVerbose('Copy ansible config...');
+        $this->writeVerbose('Copy ansible config to ' . getcwd() . '...');
         $command = sprintf(
             'cp %s %s',
             $this->ansiblePath . '/ansible.cfg',
