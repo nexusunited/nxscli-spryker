@@ -4,7 +4,7 @@
     upgrade: yes
 - name: Install general packages
   apt:
-    name: systemd,apt-transport-https,vim,git,curl,wget,zip,build-essential,tcl
+    name: python,systemd,apt-transport-https,vim,git,curl,wget,zip,build-essential,tcl
     state: present
     update_cache: yes
 - name: Install postgres
