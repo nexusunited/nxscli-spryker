@@ -1,0 +1,42 @@
+---
+- name: Add erlang apt key
+  apt_key:
+    url: http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+    state: present
+- name: Add erlang deb
+  apt_repository:
+    repo: deb http://packages.erlang-solutions.com/ubuntu xenial contrib
+    state: present
+    filename: 'rabbitmq'
+- name: Install dependencies
+  apt:
+    name: erlang,erlang-nox
+    state: latest
+    update_cache: yes
+- name: Add rabbitmq apt key
+  apt_key:
+    url: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+    state: present
+- name: Add rabbitmq deb
+  apt_repository:
+    repo: deb https://dl.bintray.com/rabbitmq/debian xenial main
+    state: present
+    filename: 'rabbitmq'
+- name: Install RabbitMQ
+  apt:
+    name: rabbitmq-server
+    state: present
+    update_cache: yes
+- name: RabbitMQ is running
+  service:
+    name: rabbitmq-server
+    state: started
+    enabled: yes
+- name: RabbitMQ install management plugin
+  shell: rabbitmq-plugins enable rabbitmq_management
+  register: rabbitmqmanagement
+- name: RabbitMQ restart
+  service:
+    name: rabbitmq-server
+    state: restarted
+  when: rabbitmqmanagement.changed

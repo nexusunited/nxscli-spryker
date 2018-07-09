@@ -1,0 +1,29 @@
+---
+- name: Prepare PHP Installation
+  apt_repository:
+    repo: "ppa:ondrej/php"
+    update_cache: yes
+- name: Install php
+  apt: name={{item}} state=present
+  with_items:
+    - php7.1
+    - php7.1-fpm
+    - php7.1-curl
+    - php7.1-bcmath
+    - php7.1-gd
+    - php7.1-gmp
+    - php7.1-intl
+    - php7.1-mcrypt
+    - php7.1-pgsql
+    - php7.1-redis
+    - php7.1-xml
+    - php7.1-mbstring
+    - php7.1-bz2
+- name: Copy config to cli
+  copy:
+    src: config/99-project.ini
+    dest: /etc/php/7.1/cli/conf.d/99-project.ini
+- name: Copy config to fpm
+  copy:
+    src: config/99-project.ini
+    dest: /etc/php/7.1/fpm/conf.d/99-project.ini

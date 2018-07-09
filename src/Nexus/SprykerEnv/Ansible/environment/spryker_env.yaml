@@ -1,0 +1,16 @@
+---
+- name: Spryker Environment for Ubuntu 16.04
+  hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+
+  roles:
+  - basics
+  - nodejs
+  - php
+  - redis
+  - jenkins
+  - elasticsearch
+  - rabbitmq

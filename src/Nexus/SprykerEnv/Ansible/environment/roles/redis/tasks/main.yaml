@@ -1,0 +1,87 @@
+---
+- stat:
+    path: /etc/redis/redis.conf
+  register: redisisinstalled
+- name: "Prepare redis installation"
+  get_url:
+    url: http://download.redis.io/redis-stable.tar.gz
+    dest: /tmp/redis-stable.tar.gz
+  when: redisisinstalled.stat.exists == false
+- name: "Unpacking redis"
+  unarchive:
+    src: /tmp/redis-stable.tar.gz
+    dest: /tmp
+    remote_src: yes
+  when: redisisinstalled.stat.exists == false
+- name: "Make redis"
+  make:
+    chdir: /tmp/redis-stable
+  when: redisisinstalled.stat.exists == false
+- name: "Make redis test"
+  make:
+    chdir: /tmp/redis-stable
+    target: test
+  when: redisisinstalled.stat.exists == false
+- name: "Make redis install"
+  make:
+    chdir: /tmp/redis-stable
+    target: install
+  when: redisisinstalled.stat.exists == false
+- name: "Create config dir"
+  file:
+    path: /etc/redis
+    state: directory
+  when: redisisinstalled.stat.exists == false
+- name: "Copy redis config"
+  copy:
+    src: /tmp/redis-stable/redis.conf
+    dest: /etc/redis/redis.conf
+    remote_src: yes
+  when: redisisinstalled.stat.exists == false
+- name: "Set Supervised for redis"
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: "^supervised "
+    line: "supervised systemd"
+  when: redisisinstalled.stat.exists == false
+- name: "Set dir for redis"
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: "^dir "
+    line: "dir /var/lib/redis"
+  when: redisisinstalled.stat.exists == false
+- name: "Copy service config"
+  copy:
+    src: config/redis.service
+    dest: /etc/systemd/system/redis.service
+- name: "Add redis group to system"
+  group:
+    name: redis
+    state: present
+- name: "Add redis user to system"
+  user:
+    name: redis
+    group: redis
+    create_home: no
+    state: present
+    system: yes
+- name: "Redis dir is present"
+  file:
+    path: /var/lib/redis
+    state: directory
+    owner: redis
+    group: redis
+    mode: 0770
+- name: Cleanup archive
+  file:
+    path: /tmp/redis-stable.tar.gz
+    state: absent
+- name: Cleanup install dir
+  file:
+    path: /tmp/redis-stable
+    state: absent
+- name: Start redis
+  service:
+    name: redis
+    state: started
+    enabled: yes

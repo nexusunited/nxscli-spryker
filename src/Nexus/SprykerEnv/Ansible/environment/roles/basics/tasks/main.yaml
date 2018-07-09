@@ -1,0 +1,29 @@
+---
+- name: Upgrade system
+  apt:
+    upgrade: yes
+- name: Install general packages
+  apt:
+    name: systemd,vim,git,curl,wget,zip,build-essential,tcl
+    state: present
+    update_cache: yes
+- name: Prepare nginx
+  file: path=/run/nginx state=directory
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+- name: Install postgres
+  apt:
+    name: postgresql,postgresql-contrib,python-psycopg2
+    state: present
+- name: "Prepare Java installation"
+  apt_repository:
+    repo: "ppa:webupd8team/java"
+    update_cache: yes
+- name: set java licence selected
+  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+- name: "Install java"
+  apt:
+    name: oracle-java8-installer
+    state: present

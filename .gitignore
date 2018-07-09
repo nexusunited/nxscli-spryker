@@ -1,0 +1,9 @@
+composer.phar
+composer.lock
+/vendor/
+/src/Generated/*
+/src/Generated/Ide/*
+!.gitkeep
+/.idea
+/ansible.cfg
+

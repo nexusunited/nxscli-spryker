@@ -1,0 +1,20 @@
+---
+- name: Include vars
+  include_vars:
+    dir: vars
+
+- name: Install the gpg key for nodejs LTS
+  apt_key:
+    url: "http://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    state: present
+
+- name: Install the nodejs LTS repos
+  apt_repository:
+    repo: "deb http://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main"
+    state: present
+    update_cache: yes
+
+- name: Install the nodejs
+  apt:
+    name: nodejs
+    state: present

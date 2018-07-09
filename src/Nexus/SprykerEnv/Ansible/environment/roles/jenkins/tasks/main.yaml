@@ -1,0 +1,81 @@
+---
+- name: Add jenkins apt key
+  apt_key:
+    url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
+    state: present
+- name: Add jenkins deb
+  apt_repository:
+    repo: deb https://pkg.jenkins.io/debian-stable binary/
+    state: present
+    filename: 'jenkins'
+- name: Install Jenkins
+  apt:
+    name: jenkins
+    state: present
+    update_cache: yes
+- name: "Write jenkins config"
+  lineinfile:
+    path: /etc/init.d/jenkins
+    insertafter: "^JAVA="
+    regexp: "^JAVA_ARGS="
+    line: "JAVA_ARGS=\"-Djenkins.install.runSetupWizard=false\""
+- name: "Write jenkins config NAME"
+  replace:
+    path: /etc/init.d/jenkins
+    regexp: '^DAEMON_ARGS=\"--name=\$NAME'
+    replace: 'DAEMON_ARGS="--name=www-data'
+- name: "Set jenkins user to www-data"
+  lineinfile:
+    path: /etc/default/jenkins
+    regexp: '^JENKINS_USER='
+    line: 'JENKINS_USER=www-data'
+- name: "Set jenkins group to www-data"
+  lineinfile:
+    path: /etc/default/jenkins
+    regexp: '^JENKINS_GROUP='
+    line: 'JENKINS_GROUP=www-data'
+- name: "Set jenkins dir to www-data"
+  file:
+    path: /var/lib/jenkins
+    state: directory
+    owner: www-data
+    group: www-data
+    recurse: yes
+- name: "Set jenkins dir to www-data"
+  file:
+    path: /usr/share/jenkins
+    state: directory
+    owner: www-data
+    group: www-data
+    recurse: yes
+- name: "Set jenkins log dir to www-data"
+  file:
+    path: /var/log/jenkins
+    state: directory
+    owner: www-data
+    group: www-data
+    recurse: yes
+- name: "Set jenkins run dir to www-data"
+  file:
+    path: /var/run/jenkins
+    state: directory
+    owner: www-data
+    group: www-data
+    recurse: yes
+- name: "Set jenkins cache dir to www-data"
+  file:
+    path: /var/cache/jenkins
+    state: directory
+    owner: www-data
+    group: www-data
+    recurse: yes
+- name: Remove Jenkins security init scripts after first startup.
+  file:
+    path: "/var/lib/jenkins/init.groovy.d/basic-security.groovy"
+    state: absent
+- name: Jenkins is running
+  service:
+    name: jenkins
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
