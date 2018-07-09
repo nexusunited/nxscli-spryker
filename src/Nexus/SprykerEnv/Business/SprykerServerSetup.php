@@ -72,7 +72,7 @@ class SprykerServerSetup
     {
         $this->writeVerbose('Docker server will be started...');
         $command = sprintf(
-            'run --name %s -d -p 0.0.0.0:%s:22 rastasheep/ubuntu-sshd:14.04',
+            'run --name %s -d -p 0.0.0.0:%s:22 rastasheep/ubuntu-sshd:16.04',
             $name,
             $port
         );
