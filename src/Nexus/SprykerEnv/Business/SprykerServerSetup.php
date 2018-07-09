@@ -61,6 +61,7 @@ class SprykerServerSetup
         $this->enableSshKeyAccess($name);
         $this->copyAnsibleConfigToLocal();
         $this->installAnsibleDependencies();
+        $this->installPythonToContainer($name);
         $this->runAnsible();
     }
 
@@ -165,5 +166,17 @@ class SprykerServerSetup
         $this->writeVerbose(
             $this->shellFacade->runCommand($command)
         );
+    }
+
+    /**
+     * @param string $name
+     */
+    private function installPythonToContainer(string $name): void
+    {
+        $command = sprintf(
+            'exec -i %s bash -c "apt-get -y update && apt-get -y install python"',
+            $name
+        );
+        $this->dockerFacade->runDocker($command);
     }
 }
