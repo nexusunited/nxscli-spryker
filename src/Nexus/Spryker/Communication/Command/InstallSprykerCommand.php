@@ -19,8 +19,8 @@ class InstallSprykerCommand extends AbstractCommand
         $this
             ->setName('spryker:install')
             ->setDescription('Install Spryker')
-            ->addArgument('container', InputArgument::OPTIONAL, 'PHP Container', 'php')
-            ->addArgument('suffix', InputArgument::OPTIONAL, 'Stores to install', '');
+            ->addArgument('suffix', InputArgument::OPTIONAL, 'Stores to install', '')
+            ->addArgument('container', InputArgument::OPTIONAL, 'PHP Container', 'php');
     }
 
     /**

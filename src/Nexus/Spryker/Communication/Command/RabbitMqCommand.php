@@ -19,10 +19,12 @@ class RabbitMqCommand extends AbstractCommand
         $this
             ->setName('spryker:rabbitmq:addstore')
             ->setDescription('Create Store in RabbitMQ')
-            ->addArgument('container', InputArgument::OPTIONAL, 'PHP Container', 'rabbitmq')
             ->addArgument('store', InputArgument::OPTIONAL, 'Store to add (e.g. DE)', 'DE')
-            ->addArgument('environment', InputArgument::OPTIONAL, 'Environment to add (e.g. development)', 'development')
-            ->addArgument('password', InputArgument::OPTIONAL, 'User password', 'mate20mg');
+            ->addArgument(
+                'environment', InputArgument::OPTIONAL, 'Environment to add (e.g. development)', 'development'
+            )
+            ->addArgument('password', InputArgument::OPTIONAL, 'User password', 'mate20mg')
+            ->addArgument('container', InputArgument::OPTIONAL, 'PHP Container', 'rabbitmq');
     }
 
     /**
