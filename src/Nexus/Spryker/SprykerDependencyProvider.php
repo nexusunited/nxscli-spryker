@@ -6,6 +6,7 @@ namespace Nexus\Spryker;
 
 use Nexus\Spryker\Communication\Command\DeploySprykerCommand;
 use Nexus\Spryker\Communication\Command\InstallSprykerCommand;
+use Nexus\Spryker\Communication\Command\RabbitMqCommand;
 use Nexus\Spryker\Communication\Command\SprykerConsoleCommand;
 use Xervice\Core\Dependency\DependencyProviderInterface;
 use Xervice\Core\Dependency\Provider\AbstractProvider;
@@ -16,6 +17,7 @@ use Xervice\Core\Dependency\Provider\AbstractProvider;
 class SprykerDependencyProvider extends AbstractProvider
 {
     public const DOCKER_FACADE = 'docker.facade';
+    public const RABBITMQ_FACADE = 'rabbitmq.facade';
     public const SPRYKER_COMMANDS = 'spryker.commands';
 
     /**
@@ -25,6 +27,10 @@ class SprykerDependencyProvider extends AbstractProvider
     {
         $dependencyProvider[self::DOCKER_FACADE] = function (DependencyProviderInterface $dependencyProvider) {
             return $dependencyProvider->getLocator()->dockerClient()->facade();
+        };
+
+        $dependencyProvider[self::RABBITMQ_FACADE] = function (DependencyProviderInterface $dependencyProvider) {
+            return $dependencyProvider->getLocator()->rabbitMq()->facade();
         };
 
         $dependencyProvider[self::SPRYKER_COMMANDS] = function () {
@@ -41,7 +47,8 @@ class SprykerDependencyProvider extends AbstractProvider
         return [
             new InstallSprykerCommand(),
             new SprykerConsoleCommand(),
-            new DeploySprykerCommand()
+            new DeploySprykerCommand(),
+            new RabbitMqCommand()
         ];
     }
 }

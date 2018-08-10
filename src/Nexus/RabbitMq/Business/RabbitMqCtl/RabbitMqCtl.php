@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Nexus\Spryker\Communication\Business\Console;
+namespace Nexus\RabbitMq\Business\RabbitMqCtl;
 
 
 use Nexus\DockerClient\DockerClientFacade;
 
-class SprykerConsole implements SprykerConsoleInterface
+class RabbitMqCtl implements RabbitMqCtlInterface
 {
     /**
      * @var \Nexus\DockerClient\DockerClientFacade
@@ -19,7 +19,7 @@ class SprykerConsole implements SprykerConsoleInterface
     private $container;
 
     /**
-     * SprykerConsole constructor.
+     * RabbitMqCtl constructor.
      *
      * @param \Nexus\DockerClient\DockerClientFacade $dockerFacade
      * @param string $container
@@ -32,14 +32,14 @@ class SprykerConsole implements SprykerConsoleInterface
 
     /**
      * @param string $command
-     * @param array $params
+     * @param mixed ...$params
      *
      * @return string
      */
-    public function console(string $command, ...$params): string
+    public function runCommand(string $command, ...$params): string
     {
         $command = sprintf(
-            'exec -i %s php /data/shop/development/current/vendor/console %s',
+            'exec -i %s rabbitmqctl %s',
             $this->container,
             sprintf(
                 $command,
@@ -49,5 +49,4 @@ class SprykerConsole implements SprykerConsoleInterface
 
         return $this->dockerFacade->runDocker($command);
     }
-
 }

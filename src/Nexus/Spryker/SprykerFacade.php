@@ -26,6 +26,27 @@ class SprykerFacade extends AbstractFacade
 
     /**
      * @param string $container
+     * @param string $store
+     * @param string $environment
+     * @param string $password
+     *
+     * @return string
+     */
+    public function addSprykerStoreToRabbitMq(
+        string $container,
+        string $store,
+        string $environment,
+        string $password
+    ): string {
+        return $this->getFactory()->createRabbitMqPrepare($container)->addStoreToRabbitMq(
+            $store,
+            $environment,
+            $password
+        );
+    }
+
+    /**
+     * @param string $container
      * @param bool $verbose
      *
      * @return string

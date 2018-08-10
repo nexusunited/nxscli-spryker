@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\Spryker\Communication\Business\Console;
+namespace Nexus\Spryker\Business\Console;
 
 interface SprykerConsoleInterface
 {

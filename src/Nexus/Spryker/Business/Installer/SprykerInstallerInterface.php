@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\Spryker\Communication\Business\Installer;
+namespace Nexus\Spryker\Business\Installer;
 
 interface SprykerInstallerInterface
 {

@@ -1,22 +1,22 @@
 <?php
 
 
-namespace Nexus\Spryker\Communication\Business\Deploy;
+namespace Nexus\Spryker\Business\Deploy;
 
 
-use Nexus\Spryker\Communication\Business\Console\SprykerConsoleInterface;
+use Nexus\Spryker\Business\Console\SprykerConsoleInterface;
 
 class SprykerDeploy implements SprykerDeployInterface
 {
     /**
-     * @var \Nexus\Spryker\Communication\Business\Console\SprykerConsoleInterface
+     * @var \Nexus\Spryker\Business\Console\SprykerConsoleInterface
      */
     private $sprykerConsole;
 
     /**
      * SprykerDeploy constructor.
      *
-     * @param \Nexus\Spryker\Communication\Business\Console\SprykerConsoleInterface $sprykerConsole
+     * @param \Nexus\Spryker\Business\Console\SprykerConsoleInterface $sprykerConsole
      */
     public function __construct(SprykerConsoleInterface $sprykerConsole)
     {

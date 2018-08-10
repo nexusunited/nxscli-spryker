@@ -1,6 +1,6 @@
 <?php
 
-namespace Nexus\Spryker\Communication\Business\Deploy;
+namespace Nexus\Spryker\Business\Deploy;
 
 interface SprykerDeployInterface
 {

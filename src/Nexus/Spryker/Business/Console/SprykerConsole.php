@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Nexus\Spryker\Communication\Business\Installer;
+namespace Nexus\Spryker\Business\Console;
 
 
 use Nexus\DockerClient\DockerClientFacade;
 
-class SprykerInstaller implements SprykerInstallerInterface
+class SprykerConsole implements SprykerConsoleInterface
 {
     /**
      * @var \Nexus\DockerClient\DockerClientFacade
@@ -19,7 +19,7 @@ class SprykerInstaller implements SprykerInstallerInterface
     private $container;
 
     /**
-     * SprykerInstaller constructor.
+     * SprykerConsole constructor.
      *
      * @param \Nexus\DockerClient\DockerClientFacade $dockerFacade
      * @param string $container
@@ -31,20 +31,23 @@ class SprykerInstaller implements SprykerInstallerInterface
     }
 
     /**
-     * @param string $suffix
+     * @param string $command
+     * @param array $params
      *
      * @return string
      */
-    public function install(string $suffix): string
+    public function console(string $command, ...$params): string
     {
         $command = sprintf(
-            'exec -i %s php /data/shop/development/current/vendor/bin/install %s',
+            'exec -i %s php /data/shop/development/current/vendor/console %s',
             $this->container,
-            $suffix
+            sprintf(
+                $command,
+                ...$params
+            )
         );
 
         return $this->dockerFacade->runDocker($command);
     }
-
 
 }
