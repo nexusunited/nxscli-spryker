@@ -57,7 +57,7 @@ class SprykerInstaller implements SprykerInstallerInterface
     private function getComposerInstall(): string
     {
         $command = sprintf(
-            'exec -i %s bash -c "cd /data/shop/development/current && composer install',
+            'exec -i %s bash -c "cd /data/shop/development/current && composer install"',
             $this->container
         );
         return $command;
