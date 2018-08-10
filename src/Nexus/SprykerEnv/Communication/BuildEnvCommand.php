@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Nexus\SprykerEnv\Communication;
@@ -20,7 +21,8 @@ class BuildEnvCommand extends AbstractCommand
             ->setName('spryker:env:server')
             ->setDescription('Create a spryker ready ubuntu server')
             ->addArgument('name', InputArgument::REQUIRED, 'Name of the new instance')
-            ->addArgument('port', InputArgument::OPTIONAL, 'SSH Port for the new instance', '22022');
+            ->addArgument('sshport', InputArgument::OPTIONAL, 'SSH Port for the new instance', '22022')
+            ->addArgument('webport', InputArgument::OPTIONAL, 'WEB Port for the new instance', '8080');
     }
 
     /**
@@ -35,7 +37,8 @@ class BuildEnvCommand extends AbstractCommand
     {
         $this->getFacade()->createSprykerServer(
             $input->getArgument('name'),
-            (int)$input->getArgument('port'),
+            (int)$input->getArgument('sshport'),
+            (int)$input->getArgument('webport'),
             $output
         );
     }

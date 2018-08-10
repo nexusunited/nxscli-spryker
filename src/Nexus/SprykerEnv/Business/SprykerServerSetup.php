@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Nexus\SprykerEnv\Business;
@@ -8,7 +9,7 @@ use Nexus\DockerClient\DockerClientFacade;
 use Nexus\Shell\ShellFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SprykerServerSetup
+class SprykerServerSetup implements SprykerServerSetupInterface
 {
     /**
      * @var ShellFacade
@@ -52,12 +53,13 @@ class SprykerServerSetup
 
     /**
      * @param string $name
-     * @param int $port
+     * @param int $sshPort
+     * @param int $webPort
      */
-    public function createSprykerServer(string $name, int $port)
+    public function createSprykerServer(string $name, int $sshPort, int $webPort): void
     {
-        $this->startDockerServer($name, $port);
-        $this->writeInventoryFile($port);
+        $this->startDockerServer($name, $sshPort, $webPort);
+        $this->writeInventoryFile($sshPort);
         $this->enableSshKeyAccess($name);
         $this->copyAnsibleConfigToLocal();
         $this->installAnsibleDependencies();
@@ -69,13 +71,14 @@ class SprykerServerSetup
      * @param string $name
      * @param int $port
      */
-    private function startDockerServer(string $name, int $port): void
+    private function startDockerServer(string $name, int $sshPort, int $webPort): void
     {
         $this->writeVerbose('Docker server will be started...');
         $command = sprintf(
-            'run --name %s -d -p 0.0.0.0:%s:22 rastasheep/ubuntu-sshd:16.04',
+            'run --name %s -d -p 0.0.0.0:%s:22 -p 0.0.0.0:%s:80 rastasheep/ubuntu-sshd:16.04',
             $name,
-            $port
+            $sshPort,
+            $webPort
         );
 
         $this->dockerFacade->runDocker($command);
@@ -98,10 +101,10 @@ class SprykerServerSetup
     private function writeInventoryFile(int $port): void
     {
         $this->writeVerbose('Writing inventory');
-        $fp = fopen($this->ansiblePath . '/inventory', 'w');
-        fwrite($fp, '[default]' . PHP_EOL);
-        fwrite($fp, '127.0.0.1:' . $port . PHP_EOL);
-        fclose($fp);
+        $file = fopen($this->ansiblePath . '/inventory', 'w');
+        fwrite($file, '[default]' . PHP_EOL);
+        fwrite($file, '127.0.0.1:' . $port . PHP_EOL);
+        fclose($file);
     }
 
     /**
@@ -153,6 +156,9 @@ class SprykerServerSetup
             'cp %s %s',
             $this->ansiblePath . '/ansible.cfg',
             getcwd() . '/ansible.cfg'
+        );
+        $this->writeVerbose(
+            $this->shellFacade->runCommand($command)
         );
     }
 

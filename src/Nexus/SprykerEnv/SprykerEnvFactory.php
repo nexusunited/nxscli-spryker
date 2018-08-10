@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 namespace Nexus\SprykerEnv;
@@ -7,6 +8,7 @@ namespace Nexus\SprykerEnv;
 use Nexus\SprykerEnv\Business\Example\StringPrinter;
 use Nexus\SprykerEnv\Business\Example\StringPrinterInterface;
 use Nexus\SprykerEnv\Business\SprykerServerSetup;
+use Nexus\SprykerEnv\Business\SprykerServerSetupInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Xervice\Core\Factory\AbstractFactory;
 
@@ -18,10 +20,10 @@ class SprykerEnvFactory extends AbstractFactory
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
-     * @return \Nexus\SprykerEnv\Business\SprykerServerSetup
+     * @return \Nexus\SprykerEnv\Business\SprykerServerSetupInterface
      * @throws \Xervice\Config\Exception\ConfigNotFound
      */
-    public function createSprykerServerSetup(OutputInterface $output)
+    public function createSprykerServerSetup(OutputInterface $output): SprykerServerSetupInterface
     {
         return new SprykerServerSetup(
             $this->getShellFacade(),
