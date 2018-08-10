@@ -1,13 +1,6 @@
-NEXUS CLI - Skeleton
+NEXUS CLI - Spryker
 ======
 
 Description
 ------
-You can use this skeleton, to write your own command sets for the nexuscli.
-
-
-Usage
--------
-```
-composer create-project nexusnetsoftgmbh/nexuscli-skeleton <your directory> dev-master
-```
+To run your spryker docker setup.
