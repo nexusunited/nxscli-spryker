@@ -19,7 +19,7 @@ class SprykerConsoleCommand extends AbstractCommand
         $this
             ->setName('spryker:console')
             ->setDescription('Run Spryker console command')
-            ->addArgument('command', InputArgument::REQUIRED, 'Command to run in spryker')
+            ->addArgument('consolecommand', InputArgument::REQUIRED, 'Command to run in spryker')
             ->addArgument('container', InputArgument::OPTIONAL, 'PHP Container', 'php');
     }
 
@@ -34,7 +34,7 @@ class SprykerConsoleCommand extends AbstractCommand
     {
         $response = $this->getFacade()->runSprykerConsole(
             $input->getArgument('container'),
-            $input->getArgument('command')
+            $input->getArgument('consolecommand')
         );
 
         if ($output->isVerbose()) {
