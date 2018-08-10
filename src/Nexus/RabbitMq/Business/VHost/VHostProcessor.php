@@ -47,7 +47,7 @@ class VHostProcessor implements VHostProcessorInterface
      */
     public function addUserToVHost(string $vhost, string $username, string $permissions): string
     {
-        $this->rabbitMqCtl->runCommand(
+        return $this->rabbitMqCtl->runCommand(
             sprintf(
                 'set_permissions -p %s %s %s',
                 $vhost,
