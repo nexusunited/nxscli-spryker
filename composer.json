@@ -1,6 +1,12 @@
 {
-  "name": "nexusnetsoftgmbh/nxscli-spryker",
-  "license": "MIT",
+  "name"             : "nexusnetsoftgmbh/nxscli-spryker",
+  "license"          : "MIT",
+  "authors"          : [
+    {
+      "name" : "Mike Bertram",
+      "email": "bertram@nexus-netsoft.com"
+    }
+  ],
   "require-dev": {
     "codeception/codeception": "*",
     "symfony/var-dumper": "*",
