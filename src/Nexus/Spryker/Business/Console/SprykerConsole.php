@@ -39,7 +39,7 @@ class SprykerConsole implements SprykerConsoleInterface
     public function console(string $command, ...$params): string
     {
         $command = sprintf(
-            'exec -i %s php /data/shop/development/current/vendor/console %s',
+            'exec -i %s php /data/shop/development/current/vendor/bin/console %s',
             $this->container,
             sprintf(
                 $command,
