@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Nexus\Development;
+namespace Nexus\Development\Business;
 
-use Xervice\Development\Command\GenerateAutoCompleteCommand;
-use Xervice\Development\DevelopmentFacade as XerviceDevelopmentFacade;
+
+use Xervice\Development\Business\DevelopmentFacade as XerviceDevelopmentFacade;
+use Xervice\Development\Communication\Console\Command\GenerateAutoCompleteCommand;
 
 class DevelopmentFacade extends XerviceDevelopmentFacade
 {

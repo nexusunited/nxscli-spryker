@@ -7,10 +7,10 @@ namespace Nexus\Spryker\Communication\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Xervice\Console\Command\AbstractCommand;
+use Xervice\Console\Business\Model\Command\AbstractCommand;
 
 /**
- * @method \Nexus\Spryker\SprykerFacade getFacade()
+ * @method \Nexus\Spryker\Business\SprykerFacade getFacade()
  */
 class InstallSprykerCommand extends AbstractCommand
 {
@@ -28,7 +28,6 @@ class InstallSprykerCommand extends AbstractCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return int|null|void
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

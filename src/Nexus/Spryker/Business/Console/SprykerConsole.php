@@ -4,12 +4,12 @@
 namespace Nexus\Spryker\Business\Console;
 
 
-use Nexus\DockerClient\DockerClientFacade;
+use Nexus\DockerClient\Business\DockerClientFacade;
 
 class SprykerConsole implements SprykerConsoleInterface
 {
     /**
-     * @var \Nexus\DockerClient\DockerClientFacade
+     * @var \Nexus\DockerClient\Business\DockerClientFacade
      */
     private $dockerFacade;
 
@@ -21,7 +21,7 @@ class SprykerConsole implements SprykerConsoleInterface
     /**
      * SprykerConsole constructor.
      *
-     * @param \Nexus\DockerClient\DockerClientFacade $dockerFacade
+     * @param \Nexus\DockerClient\Business\DockerClientFacade $dockerFacade
      * @param string $container
      */
     public function __construct(DockerClientFacade $dockerFacade, string $container)

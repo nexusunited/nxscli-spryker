@@ -1,15 +1,12 @@
 <?php
+declare(strict_types=1);
 
+namespace Nexus\Spryker\Business;
 
-namespace Nexus\Spryker;
-
-
-use Xervice\Core\Facade\AbstractFacade;
+use Xervice\Core\Business\Model\Facade\AbstractFacade;
 
 /**
- * @method \Nexus\Spryker\SprykerFactory getFactory()
- * @method \Nexus\Spryker\SprykerConfig getConfig()
- * @method \Nexus\Spryker\SprykerClient getClient()
+ * @method \Nexus\Spryker\Business\SprykerBusinessFactory getFactory()
  */
 class SprykerFacade extends AbstractFacade
 {

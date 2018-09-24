@@ -1,22 +1,20 @@
 <?php
 
 
-namespace Nexus\RabbitMq;
+namespace Nexus\RabbitMq\Business;
 
 
-use Nexus\DockerClient\DockerClientFacade;
+use Nexus\DockerClient\Business\DockerClientFacade;
 use Nexus\RabbitMq\Business\RabbitMqCtl\RabbitMqCtl;
 use Nexus\RabbitMq\Business\RabbitMqCtl\RabbitMqCtlInterface;
 use Nexus\RabbitMq\Business\User\UserProcessor;
 use Nexus\RabbitMq\Business\User\UserProcessorInterface;
 use Nexus\RabbitMq\Business\VHost\VHostProcessor;
 use Nexus\RabbitMq\Business\VHost\VHostProcessorInterface;
-use Xervice\Core\Factory\AbstractFactory;
+use Nexus\RabbitMq\RabbitMqDependencyProvider;
+use Xervice\Core\Business\Model\Factory\AbstractBusinessFactory;
 
-/**
- * @method \Nexus\RabbitMq\RabbitMqConfig getConfig()
- */
-class RabbitMqFactory extends AbstractFactory
+class RabbitMqBusinessFactory extends AbstractBusinessFactory
 {
     /**
      * @param string $container
@@ -56,7 +54,7 @@ class RabbitMqFactory extends AbstractFactory
     }
 
     /**
-     * @return \Nexus\DockerClient\DockerClientFacade
+     * @return \Nexus\DockerClient\Business\DockerClientFacade
      */
     public function getDockerFacade(): DockerClientFacade
     {

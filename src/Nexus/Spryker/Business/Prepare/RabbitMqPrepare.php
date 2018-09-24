@@ -4,12 +4,12 @@
 namespace Nexus\Spryker\Business\Prepare;
 
 
-use Nexus\RabbitMq\RabbitMqFacade;
+use Nexus\RabbitMq\Business\RabbitMqFacade;
 
 class RabbitMqPrepare implements RabbitMqPrepareInterface
 {
     /**
-     * @var \Nexus\RabbitMq\RabbitMqFacade
+     * @var \Nexus\RabbitMq\Business\RabbitMqFacade
      */
     private $rabbitMqFacade;
 
@@ -21,7 +21,7 @@ class RabbitMqPrepare implements RabbitMqPrepareInterface
     /**
      * RabbitMqPrepare constructor.
      *
-     * @param \Nexus\RabbitMq\RabbitMqFacade $rabbitMqFacade
+     * @param \Nexus\RabbitMq\Business\RabbitMqFacade $rabbitMqFacade
      * @param string $container
      */
     public function __construct(RabbitMqFacade $rabbitMqFacade, string $container)

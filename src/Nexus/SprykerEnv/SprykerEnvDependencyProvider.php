@@ -6,34 +6,35 @@ namespace Nexus\SprykerEnv;
 
 
 use Nexus\SprykerEnv\Communication\BuildEnvCommand;
-use Xervice\Core\Dependency\DependencyProviderInterface;
-use Xervice\Core\Dependency\Provider\AbstractProvider;
+use Xervice\Core\Business\Model\Dependency\DependencyContainerInterface;
+use Xervice\Core\Business\Model\Dependency\Provider\AbstractDependencyProvider;
 
-/**
- * @method \Xervice\Core\Locator\Locator getLocator()
- */
-class SprykerEnvDependencyProvider extends AbstractProvider
+class SprykerEnvDependencyProvider extends AbstractDependencyProvider
 {
     public const COMMAND_LIST = 'command.list';
     public const SHELL_FACADE = 'shell.facade';
     public const DOCKER_CLIENT_FACADE = 'docker.client.facade';
 
     /**
-     * @param \Xervice\Core\Dependency\DependencyProviderInterface $dependencyProvider
+     * @param \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface $container
+     *
+     * @return \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface
      */
-    public function handleDependencies(DependencyProviderInterface $dependencyProvider): void
+    public function handleDependencies(DependencyContainerInterface $container): DependencyContainerInterface
     {
-        $dependencyProvider[self::COMMAND_LIST] = function () {
+        $container[self::COMMAND_LIST] = function () {
             return $this->getCommandList();
         };
 
-        $dependencyProvider[self::SHELL_FACADE] = function (DependencyProviderInterface $dependencyProvider) {
-            return $dependencyProvider->getLocator()->shell()->facade();
+        $container[self::SHELL_FACADE] = function (DependencyContainerInterface $container) {
+            return $container->getLocator()->shell()->facade();
         };
 
-        $dependencyProvider[self::DOCKER_CLIENT_FACADE] = function (DependencyProviderInterface $dependencyProvider) {
-            return $dependencyProvider->getLocator()->dockerClient()->facade();
+        $container[self::DOCKER_CLIENT_FACADE] = function (DependencyContainerInterface $container) {
+            return $container->getLocator()->dockerClient()->facade();
         };
+
+        return $container;
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Nexus\Spryker;
+namespace Nexus\Spryker\Business;
 
 
-use Nexus\DockerClient\DockerClientFacade;
-use Nexus\RabbitMq\RabbitMqFacade;
+use Nexus\DockerClient\Business\DockerClientFacade;
+use Nexus\RabbitMq\Business\RabbitMqFacade;
 use Nexus\Spryker\Business\Console\SprykerConsole;
 use Nexus\Spryker\Business\Console\SprykerConsoleInterface;
 use Nexus\Spryker\Business\Deploy\SprykerDeploy;
@@ -13,12 +13,10 @@ use Nexus\Spryker\Business\Installer\SprykerInstaller;
 use Nexus\Spryker\Business\Installer\SprykerInstallerInterface;
 use Nexus\Spryker\Business\Prepare\RabbitMqPrepare;
 use Nexus\Spryker\Business\Prepare\RabbitMqPrepareInterface;
-use Xervice\Core\Factory\AbstractFactory;
+use Nexus\Spryker\SprykerDependencyProvider;
+use Xervice\Core\Business\Model\Factory\AbstractBusinessFactory;
 
-/**
- * @method \Nexus\Spryker\SprykerConfig getConfig()
- */
-class SprykerFactory extends AbstractFactory
+class SprykerBusinessFactory extends AbstractBusinessFactory
 {
     /**
      * @param string $container
@@ -72,7 +70,7 @@ class SprykerFactory extends AbstractFactory
     }
 
     /**
-     * @return \Nexus\DockerClient\DockerClientFacade
+     * @return \Nexus\DockerClient\Business\DockerClientFacade
      */
     public function getDockerFacade(): DockerClientFacade
     {
@@ -80,7 +78,7 @@ class SprykerFactory extends AbstractFactory
     }
 
     /**
-     * @return \Nexus\RabbitMq\RabbitMqFacade
+     * @return \Nexus\RabbitMq\Business\RabbitMqFacade
      */
     public function getRabbitMqFacade(): RabbitMqFacade
     {

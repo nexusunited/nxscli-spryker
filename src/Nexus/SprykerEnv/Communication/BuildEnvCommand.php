@@ -8,10 +8,10 @@ namespace Nexus\SprykerEnv\Communication;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Xervice\Console\Command\AbstractCommand;
+use Xervice\Console\Business\Model\Command\AbstractCommand;
 
 /**
- * @method \Nexus\SprykerEnv\SprykerEnvFacade getFacade()
+ * @method \Nexus\SprykerEnv\Business\SprykerEnvFacade getFacade()
  */
 class BuildEnvCommand extends AbstractCommand
 {
@@ -30,8 +30,6 @@ class BuildEnvCommand extends AbstractCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return int|null|void
-     * @throws \Core\Locator\Dynamic\ServiceNotParseable
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

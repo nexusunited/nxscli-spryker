@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 
-namespace Nexus\SprykerEnv\Business;
+namespace Nexus\SprykerEnv\Business\Model;
 
 
-use Nexus\DockerClient\DockerClientFacade;
-use Nexus\Shell\ShellFacade;
+use Nexus\DockerClient\Business\DockerClientFacadeInterface;
+use Nexus\Shell\Business\ShellFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SprykerServerSetup implements SprykerServerSetupInterface
@@ -17,7 +17,7 @@ class SprykerServerSetup implements SprykerServerSetupInterface
     private $shellFacade;
 
     /**
-     * @var \Nexus\DockerClient\DockerClientFacade
+     * @var \Nexus\DockerClient\Business\DockerClientFacadeInterface
      */
     private $dockerFacade;
 
@@ -35,13 +35,13 @@ class SprykerServerSetup implements SprykerServerSetupInterface
      * SprykerServerSetup constructor.
      *
      * @param ShellFacade $shellFacade
-     * @param \Nexus\DockerClient\DockerClientFacade $dockerFacade
+     * @param \Nexus\DockerClient\Business\DockerClientFacadeInterface $dockerFacade
      * @param OutputInterface $output
      * @param string $ansiblePath
      */
     public function __construct(
         ShellFacade $shellFacade,
-        DockerClientFacade $dockerFacade,
+        DockerClientFacadeInterface $dockerFacade,
         OutputInterface $output,
         string $ansiblePath
     ) {

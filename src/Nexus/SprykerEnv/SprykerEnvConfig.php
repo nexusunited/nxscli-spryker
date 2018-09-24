@@ -6,8 +6,7 @@ namespace Nexus\SprykerEnv;
 
 
 use Xervice\Config\XerviceConfig;
-use Xervice\Core\Config\AbstractConfig;
-use Xervice\Core\CoreConfig;
+use Xervice\Core\Business\Model\Config\AbstractConfig;
 
 class SprykerEnvConfig extends AbstractConfig
 {
@@ -15,7 +14,6 @@ class SprykerEnvConfig extends AbstractConfig
 
     /**
      * @return string
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function getAnsiblePath(): string
     {

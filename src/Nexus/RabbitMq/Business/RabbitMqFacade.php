@@ -1,15 +1,12 @@
 <?php
+declare(strict_types=1);
 
+namespace Nexus\RabbitMq\Business;
 
-namespace Nexus\RabbitMq;
-
-
-use Xervice\Core\Facade\AbstractFacade;
+use Xervice\Core\Business\Model\Facade\AbstractFacade;
 
 /**
- * @method \Nexus\RabbitMq\RabbitMqFactory getFactory()
- * @method \Nexus\RabbitMq\RabbitMqConfig getConfig()
- * @method \Nexus\RabbitMq\RabbitMqClient getClient()
+ * @method \Nexus\RabbitMq\Business\RabbitMqBusinessFactory getFactory()
  */
 class RabbitMqFacade extends AbstractFacade
 {

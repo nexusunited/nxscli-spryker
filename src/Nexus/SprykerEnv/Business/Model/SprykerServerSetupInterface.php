@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Nexus\SprykerEnv\Business;
+namespace Nexus\SprykerEnv\Business\Model;
 
 interface SprykerServerSetupInterface
 {

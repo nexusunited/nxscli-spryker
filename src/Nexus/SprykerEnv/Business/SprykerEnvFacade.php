@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace Nexus\SprykerEnv;
+namespace Nexus\SprykerEnv\Business;
 
 
 use Symfony\Component\Console\Output\OutputInterface;
-use Xervice\Core\Facade\AbstractFacade;
+use Xervice\Core\Business\Model\Facade\AbstractFacade;
 
 /**
- * @method \Nexus\SprykerEnv\SprykerEnvFactory getFactory()
+ * @method \Nexus\SprykerEnv\Business\SprykerEnvBusinessFactory getFactory()
  * @method \Nexus\SprykerEnv\SprykerEnvConfig getConfig()
  */
 class SprykerEnvFacade extends AbstractFacade
@@ -19,8 +19,6 @@ class SprykerEnvFacade extends AbstractFacade
      * @param int $sshPort
      * @param int $webPort
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @throws \Xervice\Config\Exception\ConfigNotFound
      */
     public function createSprykerServer(string $name, int $sshPort, int $webPort, OutputInterface $output): void
     {

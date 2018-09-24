@@ -4,12 +4,12 @@
 namespace Nexus\RabbitMq\Business\RabbitMqCtl;
 
 
-use Nexus\DockerClient\DockerClientFacade;
+use Nexus\DockerClient\Business\DockerClientFacade;
 
 class RabbitMqCtl implements RabbitMqCtlInterface
 {
     /**
-     * @var \Nexus\DockerClient\DockerClientFacade
+     * @var \Nexus\DockerClient\Business\DockerClientFacadeInterface
      */
     private $dockerFacade;
 
@@ -21,7 +21,7 @@ class RabbitMqCtl implements RabbitMqCtlInterface
     /**
      * RabbitMqCtl constructor.
      *
-     * @param \Nexus\DockerClient\DockerClientFacade $dockerFacade
+     * @param \Nexus\DockerClient\Business\DockerClientFacade $dockerFacade
      * @param string $container
      */
     public function __construct(DockerClientFacade $dockerFacade, string $container)

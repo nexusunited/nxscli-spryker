@@ -14,7 +14,7 @@
   },
   "require": {
     "php": ">=7.1.0",
-    "nexusnetsoftgmbh/nexuscli": "^2.1.0"
+    "nexusnetsoftgmbh/nexuscli": "^3.0.0"
   },
   "autoload": {
     "psr-4": {

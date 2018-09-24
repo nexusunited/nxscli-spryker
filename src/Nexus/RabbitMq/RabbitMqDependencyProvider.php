@@ -1,26 +1,27 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Nexus\RabbitMq;
 
 
-use Xervice\Core\Dependency\DependencyProviderInterface;
-use Xervice\Core\Dependency\Provider\AbstractProvider;
+use Xervice\Core\Business\Model\Dependency\DependencyContainerInterface;
+use Xervice\Core\Business\Model\Dependency\Provider\AbstractDependencyProvider;
 
-/**
- * @method \Xervice\Core\Locator\Locator getLocator()
- */
-class RabbitMqDependencyProvider extends AbstractProvider
+class RabbitMqDependencyProvider extends AbstractDependencyProvider
 {
     public const DOCKER_FACADER = 'docker.facade';
 
     /**
-     * @param \Xervice\Core\Dependency\DependencyProviderInterface $dependencyProvider
+     * @param \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface $container
+     *
+     * @return \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface
      */
-    public function handleDependencies(DependencyProviderInterface $dependencyProvider): void
+    public function handleDependencies(DependencyContainerInterface $container): DependencyContainerInterface
     {
-        $dependencyProvider[self::DOCKER_FACADER] = function (DependencyProviderInterface $dependencyProvider) {
-            return $dependencyProvider->getLocator()->dockerClient()->facade();
+        $container[self::DOCKER_FACADER] = function (DependencyContainerInterface $container) {
+            return $container->getLocator()->dockerClient()->facade();
         };
+
+        return $container;
     }
 }

@@ -4,12 +4,12 @@
 namespace Nexus\Spryker\Business\Installer;
 
 
-use Nexus\DockerClient\DockerClientFacade;
+use Nexus\DockerClient\Business\DockerClientFacade;
 
 class SprykerInstaller implements SprykerInstallerInterface
 {
     /**
-     * @var \Nexus\DockerClient\DockerClientFacade
+     * @var \Nexus\DockerClient\Business\DockerClientFacadeInterface
      */
     private $dockerFacade;
 
@@ -21,7 +21,7 @@ class SprykerInstaller implements SprykerInstallerInterface
     /**
      * SprykerInstaller constructor.
      *
-     * @param \Nexus\DockerClient\DockerClientFacade $dockerFacade
+     * @param \Nexus\DockerClient\Business\DockerClientFacade $dockerFacade
      * @param string $container
      */
     public function __construct(DockerClientFacade $dockerFacade, string $container)

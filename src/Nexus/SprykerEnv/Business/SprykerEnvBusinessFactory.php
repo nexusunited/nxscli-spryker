@@ -2,26 +2,24 @@
 declare(strict_types=1);
 
 
-namespace Nexus\SprykerEnv;
+namespace Nexus\SprykerEnv\Business;
 
 
-use Nexus\SprykerEnv\Business\Example\StringPrinter;
-use Nexus\SprykerEnv\Business\Example\StringPrinterInterface;
-use Nexus\SprykerEnv\Business\SprykerServerSetup;
-use Nexus\SprykerEnv\Business\SprykerServerSetupInterface;
+use Nexus\SprykerEnv\Business\Model\SprykerServerSetup;
+use Nexus\SprykerEnv\Business\Model\SprykerServerSetupInterface;
+use Nexus\SprykerEnv\SprykerEnvDependencyProvider;
 use Symfony\Component\Console\Output\OutputInterface;
-use Xervice\Core\Factory\AbstractFactory;
+use Xervice\Core\Business\Model\Factory\AbstractBusinessFactory;
 
 /**
  * @method \Nexus\SprykerEnv\SprykerEnvConfig getConfig()
  */
-class SprykerEnvFactory extends AbstractFactory
+class SprykerEnvBusinessFactory extends AbstractBusinessFactory
 {
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
-     * @return \Nexus\SprykerEnv\Business\SprykerServerSetupInterface
-     * @throws \Xervice\Config\Exception\ConfigNotFound
+     * @return \Nexus\SprykerEnv\Business\Model\SprykerServerSetupInterface
      */
     public function createSprykerServerSetup(OutputInterface $output): SprykerServerSetupInterface
     {
@@ -42,7 +40,7 @@ class SprykerEnvFactory extends AbstractFactory
     }
 
     /**
-     * @return \Nexus\Shell\ShellFacade
+     * @return \Nexus\Shell\Business\ShellFacadeInterface
      */
     public function getShellFacade()
     {
@@ -50,7 +48,7 @@ class SprykerEnvFactory extends AbstractFactory
     }
 
     /**
-     * @return \Nexus\DockerClient\DockerClientFacade
+     * @return \Nexus\DockerClient\Business\DockerClientFacadeInterface
      */
     public function getDockerClientFacade()
     {

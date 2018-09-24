@@ -8,34 +8,30 @@ use Nexus\Spryker\Communication\Command\DeploySprykerCommand;
 use Nexus\Spryker\Communication\Command\InstallSprykerCommand;
 use Nexus\Spryker\Communication\Command\RabbitMqCommand;
 use Nexus\Spryker\Communication\Command\SprykerConsoleCommand;
-use Xervice\Core\Dependency\DependencyProviderInterface;
-use Xervice\Core\Dependency\Provider\AbstractProvider;
+use Xervice\Core\Business\Model\Dependency\DependencyContainerInterface;
+use Xervice\Core\Business\Model\Dependency\Provider\AbstractDependencyProvider;
 
-/**
- * @method \Xervice\Core\Locator\Locator getLocator()
- */
-class SprykerDependencyProvider extends AbstractProvider
+class SprykerDependencyProvider extends AbstractDependencyProvider
 {
     public const DOCKER_FACADE = 'docker.facade';
     public const RABBITMQ_FACADE = 'rabbitmq.facade';
     public const SPRYKER_COMMANDS = 'spryker.commands';
 
-    /**
-     * @param \Xervice\Core\Dependency\DependencyProviderInterface $dependencyProvider
-     */
-    public function handleDependencies(DependencyProviderInterface $dependencyProvider): void
+    public function handleDependencies(DependencyContainerInterface $container): DependencyContainerInterface
     {
-        $dependencyProvider[self::DOCKER_FACADE] = function (DependencyProviderInterface $dependencyProvider) {
-            return $dependencyProvider->getLocator()->dockerClient()->facade();
+        $container[self::DOCKER_FACADE] = function (DependencyContainerInterface $container) {
+            return $container->getLocator()->dockerClient()->facade();
         };
 
-        $dependencyProvider[self::RABBITMQ_FACADE] = function (DependencyProviderInterface $dependencyProvider) {
-            return $dependencyProvider->getLocator()->rabbitMq()->facade();
+        $container[self::RABBITMQ_FACADE] = function (DependencyContainerInterface $container) {
+            return $container->getLocator()->rabbitMq()->facade();
         };
 
-        $dependencyProvider[self::SPRYKER_COMMANDS] = function () {
+        $container[self::SPRYKER_COMMANDS] = function () {
             return $this->getCommands();
         };
+
+        return $container;
     }
 
     /**
