@@ -43,6 +43,7 @@ class SprykerDeploy implements SprykerDeployInterface
         $response .= $this->sprykerConsole->console('data:import %s', $suffix);
         $response .= $this->sprykerConsole->console('transfer:generate %s', $suffix);
         $response .= $this->sprykerConsole->console('product-label:relations:update %s', $suffix);
+        $response .= $this->sprykerConsole->console('search:setup:index-map %s', $suffix);
         $response .= $this->sprykerConsole->console('setup:jenkins:generate %s', $suffix);
         $response .= $this->sprykerConsole->console('setup:jenkins:enable %s', $suffix);
         $response .= $this->sprykerConsole->console('frontend:project:install-dependencies %s', $suffix);
