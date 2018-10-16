@@ -30,7 +30,7 @@ class DeploySprykerCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $response = $this->getFacade()->installSpryker(
+        $response = $this->getFacade()->deploySpryker(
             $input->getArgument('container'),
             $output->isVerbose()
         );
