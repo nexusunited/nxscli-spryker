@@ -32,10 +32,11 @@ class SprykerInstaller implements SprykerInstallerInterface
 
     /**
      * @param string $suffix
+     * @param string $roles
      *
      * @return string
      */
-    public function install(string $suffix): string
+    public function install(string $suffix, string $roles): string
     {
         $response = '';
 
@@ -43,7 +44,7 @@ class SprykerInstaller implements SprykerInstallerInterface
             $this->getComposerInstall()
         );
         $response .= $this->dockerFacade->runDocker(
-            $this->getInstallCommand($suffix)
+            $this->getInstallCommand($suffix, $roles)
         );
 
         return $response;
@@ -65,14 +66,16 @@ class SprykerInstaller implements SprykerInstallerInterface
 
     /**
      * @param string $suffix
+     * @param string $roles
      *
      * @return string
      */
-    private function getInstallCommand(string $suffix): string
+    private function getInstallCommand(string $suffix, string $roles): string
     {
         $command = sprintf(
-            'exec -i %s php /data/shop/development/current/vendor/bin/install %s',
+            'exec -i %s php /data/shop/development/current/vendor/bin/install -r %s %s',
             $this->container,
+            $roles,
             $suffix
         );
         return $command;

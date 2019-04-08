@@ -13,12 +13,13 @@ class SprykerFacade extends AbstractFacade
     /**
      * @param string $container
      * @param string $suffix
+     * @param string $roles
      *
      * @return string
      */
-    public function installSpryker(string $container, string $suffix): string
+    public function installSpryker(string $container, string $suffix, string $roles): string
     {
-        return $this->getFactory()->createprykerInstaller($container)->install($suffix);
+        return $this->getFactory()->createprykerInstaller($container)->install($suffix, $roles);
     }
 
     /**
